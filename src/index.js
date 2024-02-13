@@ -1,101 +1,72 @@
+// Display ramen images
 async function displayRamens() {
-  const response = await fetch('http://localhost:3000/ramens');
-  const ramens = await response.json();
+  try {
+    const response = await fetch('http://localhost:3000/ramens');
+    const ramens = await response.json();
 
-  const ramenMenu = document.getElementById('ramen-menu');
-  ramenMenu.innerHTML = '';
+    const ramenMenu = document.getElementById('ramen-menu');
+    ramenMenu.innerHTML = '';
 
-  ramens.forEach((ramen) => {
-    const imgContainer = document.createElement('div')
-    const img = document.createElement('img');
-    img.src = ramen.image;
-    img.addEventListener('click', () => handleClick(ramen));
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.addEventListener('click', () => handleDelete(ramen));
-
-    imgContainer.appendChild(img);
-    imgContainer.appendChild(deleteButton);
-
-    ramenMenu.appendChild(img);
-  });
-}
-
-function handleDelete(ramen) {
-  const ramenMenu = document.getElementById('ramen-menu');
-  const ramenDetail = document.getElementById('ramen-detail');
-
-  const ramenItem = document.querySelector(`[data-id="${ramen.id}"]`);
-  if (ramenItem) {
-    ramenMenu.removeChild(ramenItem.parentElement);
-  }
-
-  if (ramenDetail.dataset.id === ramen.id) {
-    ramenDetail.innerHTML = '';
+    ramens.forEach((ramen) => {
+      const img = document.createElement('img');
+      img.src = ramen.image;
+      img.alt = ramen.name;
+      img.classList.add('ramen-image');
+      img.addEventListener('click', () => handleClick(ramen));
+      ramenMenu.appendChild(img);
+    });
+  } catch (error) {
+    console.error('Error fetching and displaying ramens:', error);
   }
 }
 
+// Handle click event
 function handleClick(ramen) {
   const ramenDetail = document.getElementById('ramen-detail');
   ramenDetail.innerHTML = `
-    <img src="${ramen.image}" />
-    <h2>${ramen.name}</h2>
-    <p><strong>Rating:</strong> ${ramen.rating}</p>
-    <p><strong>Comment:</strong> ${ramen.comment}</p>
+    <div class="ramen-detail-image-container">
+      <img class="ramen-image" src="${ramen.image}" alt="${ramen.name}" />
+      <p class="ramen-name">${ramen.name}</p>
+    </div>
+    <div>
+      <p><strong>Rating:</strong> ${ramen.rating}</p>
+      <p><strong>Comment:</strong> ${ramen.comment}</p>
+    </div>
   `;
+  const form = document.getElementById('new-ramen');
+  const clickedImage = event.target;
+  form.style.left = `${clickedImage.offsetLeft + (clickedImage.clientWidth / 2)}px`;
+  form.style.top = `${clickedImage.offsetTop + clickedImage.clientHeight}px`;
 }
 
+// Add submit listener
 function addSubmitListener() {
   const form = document.getElementById('new-ramen');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const image = document.getElementById('image').value;
-    const rating = document.getElementById('rating').value;
-    const comment = document.getElementById('comment').value;
-
-    const response = await fetch('http://localhost:3000/ramens', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, image, rating, comment }),
-    });
-
-    if (response.ok) {
-      displayRamens();
-      form.reset();
-    }
+    const name = document.getElementById('new-name').value;
+    const restaurant = document.getElementById('new-restaurant').value;
+    const image = document.getElementById('new-image').value;
+    const rating = document.getElementById('new-rating').value;
+    const comment = document.getElementById('new-comment').value;
+    const newRamen = { name, restaurant, image, rating, comment };
+    const img = document.createElement('img');
+    img.src = newRamen.image;
+    img.alt = newRamen.name;
+    img.classList.add('ramen-image');
+    img.addEventListener('click', () => handleClick(newRamen));
+    document.getElementById('ramen-menu').appendChild(img);
+    form.reset();
   });
 }
 
-async function updateRamenById(id, rating, comment) {
-  try {
-    const response = await fetch(`http://localhost:3000/ramens/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ rating, comment })
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to update ramen');
-    }
-
-    console.log('Ramen updated successfully');
-  } catch (error) {
-    console.error('Error updating ramen:', error);
-  }
-}
-
-
+// Main function to start the program logic
 function main() {
   document.addEventListener('DOMContentLoaded', () => {
     displayRamens();
     addSubmitListener();
-    addEditSubmitListener(); // Add this line
   });
 }
 
 main();
+

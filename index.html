@@ -13,29 +13,17 @@
     <h3>Ramen Rater</h3>
   </header>
 
-  
-  <div id="ramen-menu">
-  
+  <div id="ramen-menu" class="image-container">
+    <img class="ramen-image" src="http://127.0.0.1:8080/assets/ramen/shoyu.jpg" alt="Shoyu Ramen" />
+    <img class="ramen-image" src="http://127.0.0.1:8080/assets/ramen/naruto.jpg" alt="Naruto Ramen" />
+    <img class="ramen-image" src="http://127.0.0.1:8080/assets/ramen/gyukotsu.jpg" alt="Gyukotsu Ramen" />
+    <img class="ramen-image" src="http://127.0.0.1:8080/assets/ramen/kojiro.jpg" alt="Kojiro Ramen" />
+    <img class="ramen-image" src="http://127.0.0.1:8080/assets/ramen/your_fifth_image.jpg" alt="Fifth Ramen" />
   </div>
 
+  <div id="ramen-detail" class="image-container"></div>
 
-  <div id="ramen-detail">
-    <img class="detail-image" src="./assets/image-placeholder.jpg" alt="Insert Name Here" />
-    <h2 class="name">Insert Name Here</h2>
-    <h3 class="restaurant">Insert Restaurant Here</h3>
-  </div>
-
-  <h3>Rating:</h3>
-  <p>
-    <span id='rating-display'>Insert rating here</span> / 10
-  </p>
-  <h3>Comment:</h3>
-  <p id='comment-display'>
-    Insert comment here
-  </p>
-
-
-  <form id="new-ramen">
+  <form id="new-ramen" class="form-container">
     <h4>Add New Ramen</h4>
     <label for="new-name">Name: </label>
     <input type="text" name="name" id="new-name" />
@@ -46,20 +34,10 @@
     <label for="new-rating">Rating: </label>
     <input type="number" name="rating" id="new-rating" />
     <label for="new-comment">Comment: </label>
-    <textarea name="new-comment" name="new-comment" id="new-comment"></textarea>
+    <textarea name="comment" id="new-comment"></textarea>
     <input type="submit" id='submit-button' value="Create" />
-  </form>
-
-  <form id="edit-ramen">
-    <h4>Update the Featured Ramen</h4>
-    <label for="rating">Rating: </label>
-    <input type="number" name="rating" id="new-rating" />
-    <label for="new-comment">Comment: </label>
-    <textarea name="new-comment" id="new-comment"></textarea>
-    <input type="submit" value="Update" />
   </form>
 
 </body>
 
 </html>
-
