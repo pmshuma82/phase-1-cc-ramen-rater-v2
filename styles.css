@@ -23,75 +23,46 @@ header {
 
 main {
   display: flex;
-  flex-direction: column; /* Change flex direction to column */
-  align-items: center; /* Center items horizontally */
-}
-
-section {
-  padding: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
 #ramen-menu {
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
   justify-content: center;
 }
 
 #ramen-menu img {
-  max-width: 200px;
-  height: auto;
-  cursor: pointer;
-  position: relative; /* Position relative for absolute positioning */
+  width: 90px; /* Adjusted width */
+  height: 90px; /* Adjusted height */
+  margin: 5px; /* Adjust spacing between images */
+  object-fit: cover;
 }
 
-#ramen-menu img span {
+.ramen-name {
+  display: none;
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 5px;
+  left: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   padding: 5px;
 }
 
 #ramen-detail {
   text-align: center;
-  margin-top: 20px; /* Add margin to separate from the images */
-}
-
-.detail-image {
-  max-width: 300px;
-  height: auto;
-  margin-bottom: 20px;
-  position: relative; /* Position relative for absolute positioning */
-}
-
-.detail-image span {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-  font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  padding: 5px;
-}
-
-footer {
-  width: 100%;
-  text-align: center;
   margin-top: 20px;
 }
 
 form {
-  width: 300px; /* Adjust the width of the form box */
+  width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-top: 20px; /* Add margin to separate from the images */
-  align-self: center; /* Center the form horizontally */
+  margin-top: 20px;
+  align-self: center;
 }
 
 form h4 {
@@ -121,3 +92,10 @@ input[type="submit"]:hover,
 button:hover {
   background-color: #555;
 }
+
+/* At the bottom of your existing CSS file */
+.ramen-image-clicked {
+  width: 200px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
